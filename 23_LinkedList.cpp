@@ -83,5 +83,8 @@ int main()
              << "Do you want to insert another number (enter 'y' for continue): ";
         cin >> ch;
     } while (ch == 'y');
+    cout << endl
+         << endl
+         << "Exiting....." << endl;
     return 0;
 }

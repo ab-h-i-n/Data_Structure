@@ -1,3 +1,6 @@
+/*Write a program to implementation of
+circular queue using arrays (linear queue ) menu driven program*/
+
 #include <iostream>
 #define MAX 5
 using namespace std;
@@ -5,20 +8,39 @@ using namespace std;
 class CQueue
 {
     int q[MAX];
-    int f = -1;
-    int r = -1;
+    int f;
+    int r;
     int n;
 
 public:
+    CQueue()
+    {
+        f = r = -1;
+    }
+
+    bool isFull()
+    {
+        return (r + 1) % MAX == f;
+    }
+
+    bool isEmpty()
+    {
+        return f == -1;
+    }
+
     void DispCQ()
     {
         if (isEmpty())
         {
-            cout << "Queue is empty." << endl;
+            cout << endl
+                 << endl
+                 << "Queue is empty." << endl;
             return;
         }
 
-        cout << "Queue: ";
+        cout << endl
+             << endl
+             << "Queue: ";
         int i = f;
         do
         {
@@ -45,7 +67,8 @@ public:
             }
         }
 
-        cout << "Enter " << n << " elements for the queue: ";
+        cout << endl
+             << "Enter " << n << " elements for the queue: ";
         for (int i = 0; i < n; i++)
         {
             cin >> q[(r + 1) % MAX];
@@ -53,23 +76,16 @@ public:
         }
 
         f = 0;
-    }
 
-    bool isFull()
-    {
-        return (r + 1) % MAX == f;
+        DispCQ();
     }
-
-    bool isEmpty()
-    {
-        return f == -1;
-    }
-
     void InsCQ()
     {
         if (isFull())
         {
-            cout << "Queue is full!" << endl;
+            cout << endl
+                 << endl
+                 << "Queue is full!" << endl;
             return;
         }
 
@@ -84,13 +100,17 @@ public:
 
         r = (r + 1) % MAX;
         q[r] = x;
+
+        DispCQ();
     }
 
     void DelCQ()
     {
         if (isEmpty())
         {
-            cout << "Queue is empty!" << endl;
+            cout << endl
+                 << endl
+                 << "Queue is empty!" << endl;
             return;
         }
 
@@ -106,6 +126,8 @@ public:
         }
 
         cout << "Element " << x << " deleted successfully!" << endl;
+
+        DispCQ();
     }
 };
 
@@ -113,15 +135,13 @@ int main()
 {
     CQueue q;
     q.ReadCQ();
-    q.DispCQ();
 
     while (true)
     {
         int choice;
         cout << endl
-             << "1. Insert an element" << endl
-             << "2. Delete an element" << endl
-             << "3. Display the queue" << endl
+             << "1. Insert" << endl
+             << "2. Delete" << endl
              << "0. Exit" << endl
              << "Enter your choice: ";
         cin >> choice;
@@ -134,13 +154,13 @@ int main()
         case 2:
             q.DelCQ();
             break;
-        case 3:
-            q.DispCQ();
-            break;
         case 0:
+            cout << endl
+                 << endl
+                 << "Exiting....";
             exit(0);
         default:
-            cout << "Invalid choice. Please try again." << endl;
+            cout << "Invalid choice !" << endl;
         }
     }
 

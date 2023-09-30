@@ -132,27 +132,29 @@ int main()
 
         cout << endl
              << endl
-             << "Do you want to insert another element (enter 'y' for continue) : ";
+             << "Enter 'y' to insert another element : ";
         cin >> ch;
-    } while (ch == 'y');
+    } while (ch == 'y' || ch == 'Y');
 
-    cout << endl
-         << endl
-         << "Do you want to insert after a particulat element ('y' to continue) : ";
-    cin >> ch;
-
-    if (ch == 'y')
-    {
-        l.InsAftElem();
-        l.DispLL();
-    }
-    else
+    while (true)
     {
         cout << endl
              << endl
-             << "Exiting..." << endl;
-        exit(0);
-    }
+             << "Enter 'y' to insert after a particular element : ";
+        cin >> ch;
 
+        if (ch == 'y' || ch == 'Y')
+        {
+            l.InsAftElem();
+            l.DispLL();
+        }
+        else
+        {
+            cout << endl
+                 << endl
+                 << "Exiting..." << endl;
+            exit(0);
+        }
+    }
     return 0;
 }

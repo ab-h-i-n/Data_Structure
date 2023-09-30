@@ -1,114 +1,155 @@
-/*Write a program to implementation of queue using arrays (linear queue ) menu driven program*/
+/*Write a program to implementation of
+queue using arrays (linear queue ) menu driven program*/
 
 #include <iostream>
-#define size 5
+#define MAX 5
 using namespace std;
+
 class Queue
 {
-    int queue[size], front = 0, rear = 0, x;
+
+    int f;
+    int r;
+    int q[MAX];
+    int n;
 
 public:
-    void readdata(int n)
+    Queue()
     {
-        x = n;
-        for (rear = front; rear < x; rear++)
-        {
-            cin >> queue[rear];
-        }
-        rear = rear - 1;
+        f = r = -1;
     }
-    void insert()
+    void DispQ()
     {
-        int item;
-        if (rear >= size - 1)
+
+        if (f == -1 || f > r)
         {
-            cout << "\n queue is full.insertion is not possible";
+            cout << endl
+                 << endl
+                 << "Queue is empty!" << endl;
         }
         else
         {
-            cout << "\n enter the item to be inserted: ";
-            cin >> item;
-            rear = rear + 1;
-            x = x + 1;
-            queue[rear] = item;
-            cout << "\n new queue after insertion: ";
-            display();
+            cout << endl
+                 << endl
+                 << "Queue : ";
+            for (int i = f; i <= r; i++)
+            {
+                cout << q[i] << "\t";
+            }
         }
     }
-    void Delete()
+
+    void ReadQ()
     {
-        int item;
-        if ((front < 0) || (front > rear))
+        while (true)
         {
-            cout << "\n queue is empty ";
-            exit(0);
-        }
-        else
-        {
-            item = queue[front];
-            front = front + 1;
-            cout << "\n " << item << " deleted from queue";
-            if (front > rear)
-                cout << "\n queue is empty.deletion is not possible";
+            cout << endl
+                 << "Enter the size of queue : ";
+            cin >> n;
+
+            if (n < 1 || n > MAX)
+            {
+                cout << endl
+                     << endl
+                     << "Invalid size!" << endl;
+            }
             else
             {
-                cout << "\n after deletion queue elements are: ";
-                display();
+                break;
             }
         }
+        cout << endl
+             << "Enter the element of the queue : ";
+        for (r = 0; r < n; r++)
+        {
+            cin >> q[r];
+        }
+        r--;
+        f = 0;
+        DispQ();
     }
-    void display()
+
+    void InsQ()
     {
-        for (rear = front; rear < x; rear++)
-            cout << queue[rear] << " ";
-        rear -= 1;
+
+        if (r == MAX - 1)
+        {
+            cout << endl
+                 << endl
+                 << "Cant insert more elemets or Queue is full!" << endl;
+            return;
+        }
+
+        int x;
+        cout << "Enter the element : ";
+        cin >> x;
+        q[++r] = x;
+
+        cout << endl
+             << endl
+             << "Element " << x << " has been inserted!" << endl;
+        DispQ();
+    }
+
+    void DelQ()
+    {
+
+        if (f == -1)
+        {
+            cout << endl
+                 << endl
+                 << "Queue is empty!" << endl;
+            return;
+        }
+
+        int x = q[f++];
+
+        cout << endl
+             << endl
+             << "Element " << x << " has been deleted!" << endl;
+        DispQ();
     }
 };
+
 int main()
 {
-    Queue q1;
-    int n, ch;
-top:
-    cout << "\n enter the number of elements in queue: ";
-    cin >> n;
-    if ((n <= size) && (n > 0))
+
+    Queue q;
+
+    q.ReadQ();
+
+    int ch;
+    while (true)
     {
-        cout << "\n enter the elements of queue: ";
-        q1.readdata(n);
-        cout << "\n queue elements are: ";
-        q1.display();
-        do
+        cout << endl
+             << endl;
+        cout << "1.Insert" << endl
+             << "2.Delete" << endl
+             << "0.Exit" << endl
+             << "Enter your choice : ";
+        cin >> ch;
+
+        switch (ch)
         {
-            cout << "\n 1.insert an element";
-            cout << "\n 2.delete an item";
-            cout << "\n 3.display";
-            cout << "\n 0.exit";
-            cout << "\n enter your choice: ";
-            cin >> ch;
-            switch (ch)
-            {
-            case 1:
-                q1.insert();
-                break;
-            case 2:
-                q1.Delete();
-                break;
-            case 3:
-                cout << "\n the queue elements are: ";
-                q1.display();
-                break;
-            case 0:
-                cout << "\n exiting ";
-                break;
-            default:
-                cout << "\n invalid choice";
-            }
-        } while (ch != 0);
+        case 1:
+            q.InsQ();
+            break;
+        case 2:
+            q.DelQ();
+            break;
+        case 0:
+            cout << endl
+                 << endl
+                 << "Exiting...." << endl;
+            exit(0);
+            break;
+        default:
+            cout << endl
+                 << endl
+                 << "Invalid choice!" << endl;
+            break;
+        }
     }
-    else
-    {
-        cout << "\n invalid size entry.enter size between 1-5";
-        goto top;
-    }
+
     return 0;
 }
